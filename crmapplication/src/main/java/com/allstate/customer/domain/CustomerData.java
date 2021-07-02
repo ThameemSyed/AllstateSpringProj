@@ -1,21 +1,28 @@
 package com.allstate.customer.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.persistence.*;
+import javax.xml.stream.events.Comment;
+import java.util.List;
 
 @Entity
-@Table(name = "customerdata")
+@Table(name = "customerdetails")
 public class CustomerData {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer customerId;
+
     private String firstName;
     private String middleName;
     private String lastName;
-    private Integer phoneNumber;
+
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Interaction> interactions;
 
     public Integer getCustomerId() {
         return customerId;
@@ -30,7 +37,10 @@ public class CustomerData {
     }
 
     public void setFirstName(String firstName) {
+        System.out.println("at line 33"+ firstName);
         this.firstName = firstName;
+        System.out.println("at line 34"+ this.firstName);
+        //System.out.println("line 67" + this.country);
     }
 
     public String getMiddleName() {
@@ -49,22 +59,23 @@ public class CustomerData {
         this.lastName = lastName;
     }
 
-    public Integer getPhoneNumber() {
-        return phoneNumber;
+    public List<Interaction> getInteractions() {
+        return interactions;
     }
 
-    public void setPhoneNumber(Integer phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setInteractions(List<Interaction> interactions) {
+        this.interactions = interactions;
     }
 
     @Override
     public String toString() {
-        return "Customer{" +
+        return "CustomerData{" +
                 "customerId=" + customerId +
                 ", firstName='" + firstName + '\'' +
                 ", middleName='" + middleName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", phoneNumber=" + phoneNumber +
+                ", interactions=" + interactions +
                 '}';
     }
+
 }
