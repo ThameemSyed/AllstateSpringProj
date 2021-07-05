@@ -52,7 +52,7 @@ public class CustomerServiceImpl implements CustomerService{
         if(newCustomer.getLastName() != null){
             custData.setLastName(newCustomer.getLastName());
         }
-        if(custData.getMiddleName() != null){
+        if(newCustomer.getMiddleName() != null){
             custData.setMiddleName((newCustomer.getMiddleName()));
         }
         repository.save(custData);

@@ -24,10 +24,12 @@ public class InteractionController {
 
     }
 
-    @GetMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public List<Interaction> getAllInteractions(@PathVariable Integer id)
+    //@GetMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE})
+    //public List<Interaction> getAllInteractions(@PathVariable Integer id)
+    @GetMapping()
+    public List<Interaction> getAllInteractions(@RequestParam(value = "customerId", required = false) Integer customerId)
     {
-        return interaction.getAllInteractionById(id);
+        return interaction.getAllInteractionById(customerId);
     }
 
     @PutMapping("/{id}")
